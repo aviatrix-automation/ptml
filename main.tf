@@ -11,7 +11,7 @@ module "transit_aws_1" {
   ha_gw         = each.value.ha_gw
   insane_mode   = each.value.insane_mode
 }
-
+/*
 module "transit-peering" {
   source  = "terraform-aviatrix-modules/mc-transit-peering/aviatrix"
   version = "1.0.4"
@@ -62,10 +62,10 @@ resource "aviatrix_spoke_gateway" "spoke_gateway_aws" {
 resource "aviatrix_spoke_transit_attachment" "spoke_attachment" {
   for_each        = var.gw_data
   spoke_gw_name   = aviatrix_spoke_gateway.spoke_gateway_aws[each.key].gw_name
-  transit_gw_name = each.value.transit
+  transit_gw_name = join(",", (values({ for key, restr in module.transit_aws_1 : key => restr.transit_gateway.gw_name if restr.transit_gateway.vpc_reg == each.value.region })))
 
 }
-
+*/
 ##############SNAT To provide 0/0 in internet traffic#######
 /*
 resource "aviatrix_gateway_snat" "internet_snat" {
@@ -147,6 +147,7 @@ resource "aviatrix_transit_external_device_conn" "site2cloud_affiliate_transit_e
   #enable_single_ip_ha       = false
 
 }
+/*
 #############Test infra to be deleted #############
 
 resource "aviatrix_vpc" "aws_vpc" {
@@ -167,3 +168,4 @@ resource "aviatrix_vpc" "aws_vpc2" {
   aviatrix_transit_vpc = false
   aviatrix_firenet_vpc = false
 }
+*/

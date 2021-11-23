@@ -48,7 +48,7 @@ gw_data = {
     hpe              = false
     allocate_new_eip = false
     vpc_cidr         = "10.0.0.0/16" #needed to create the snat entry
-    transit          = "avx-ptml-east1-transit"
+    #transit          = "avx-ptml-east1-transit"
   }
 
   ptus2 = {
@@ -104,4 +104,4 @@ remote_site = {
   }
   */
 }
-bgp_as_num = "65000"
+bgp_as_num = "5678"
